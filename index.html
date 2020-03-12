@@ -4,20 +4,29 @@
 		<meta charset=utf-8>
 		<title>Planet Generator</title>
 		<style>
-			body { margin: 0; }
+			body { 
+				margin: 0; 
+				background-color: black;
+			}
 			canvas { width: 100%; height: 100% }
 			#gui-container {
 				position: absolute;
-				top: 5%;
+				top: 0;
 				right: 0;
+			}
+			p{
+				color: white;
 			}
 		</style>
 	</head>
 	<body>
 		
-		Seed: <input type="text" name="seed" id="seed" value=''>
+		<p>
+			Seed: <input type="text" name="seed" id="seed" value=''>
+			<button onclick="formData();">Use Seed</button>
+		</p>
+		
 		<div id="gui-container"></div>
-		<button onclick="formData();">Use Seed</button>
 		
 		<script src="js/libs/dat.gui.min.js"></script>
 		<script src="js/libs/three.js"></script>

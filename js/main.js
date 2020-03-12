@@ -875,7 +875,7 @@ function animate() {
     requestAnimationFrame(animate);
     if (parameters.auto_rotation == true){
         planet.rotation.y += 0.003;
-        //controls.update();
+        controls.update();
     }
     renderer.render(scene, camera);
 }
