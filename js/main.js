@@ -658,7 +658,10 @@ var raycaster = new THREE.Raycaster();
 var mouse = new THREE.Vector2();
 renderer.shadowMap.enabled = true;
 renderer.setSize(window.innerWidth * 1, window.innerHeight * 0.96);
+renderer.domElement.id = "canvas";
 document.body.appendChild(renderer.domElement);
+
+var canvas = document.getElementById("canvas");
 
 //fps counter for testing
 //javascript:(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()
@@ -690,13 +693,12 @@ var skySphere = new THREE.Mesh(skyGeometry, skyMaterial);
 skySphere.scale.set(highestPeak + 0.05, highestPeak + 0.05, highestPeak + 0.05);
 
 var text2 = document.createElement('div');
-text2.style.position = 'absolute';
-text2.style.zIndex = 1;
-text2.style.width = 100;
-text2.style.height = 100;
-text2.style.backgroundColor = "blue";
 text2.innerHTML = seed;
-text2.style.top = 700 + 'px';
+
+text2.style.position = 'fixed';
+text2.style.zIndex = 1;
+text2.style.backgroundColor = "blue";
+text2.style.bottom = 10 + 'px';
 text2.style.left = 0 + 'px';
 document.body.appendChild(text2);
 
@@ -708,7 +710,7 @@ planet.add(waterSphere);
 scene.add(planet);
 scene.add(skySphere);
 
-camera.position.z = 10;
+camera.position.z = 15;
 
 var ambientLight = new THREE.AmbientLight( 0x0a0a0a );
 scene.add(ambientLight);
@@ -722,8 +724,13 @@ var sun = new THREE.Mesh(sunGeometry, sunMaterial);
 sun.position.set(300, 60, 70);
 scene.add(sun);
 
-var gui = new dat.GUI({});
+var gui = new dat.GUI({  });
 
+var guiContainer = document.getElementById("gui-container");
+guiContainer.append(gui.domElement);
+canvas.append(guiContainer.domElement);
+
+guiContainer.style.zIndex = 3;
 var newMaterial = terrain.material;
 
 var parameters = {
